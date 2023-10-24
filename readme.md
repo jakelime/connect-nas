@@ -30,9 +30,6 @@ App to maintain connection to NAS servers
    INFO    : mounted successfully - local_path=PosixPath('/Volumes/yy')
    ```
 
-````
-
-
 ## Setup
 
 Tested with
@@ -48,4 +45,4 @@ WARNING:
 
 ```bash
 pyinstaller cli.py --noconsole --name connectNas --add-data '.env:.' --icon icon.icns
-````
+```
