@@ -21,7 +21,6 @@ paths_db = {}
 # Key: smb address
 # Value: mounted local address
 # e.g. "smb://10.10.1.2/photos": "/Volumes/photos"
-# "smb://192.168.50.243/home": "/Volumes/home"
 for key, value in kv_list:
     k = os.getenv(key, None)
     if not k:
