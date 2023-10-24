@@ -31,5 +31,5 @@ WARNING:
 - `.env` will be packaged and distributed together in the `.app` distribution file
 
 ```bash
-pyinstaller cli.py --noconsole --name connectNas --add-data '.env:.'
+pyinstaller cli.py --noconsole --name connectNas --add-data '.env:.' --icon icon.icns
 ```
