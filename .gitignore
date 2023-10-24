@@ -2,9 +2,6 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,python
 
 
-cnns/config.py
-
-
 ### macOS ###
 # General
 .DS_Store
