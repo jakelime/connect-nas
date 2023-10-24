@@ -30,6 +30,10 @@ App to maintain connection to NAS servers
    INFO    : mounted successfully - local_path=PosixPath('/Volumes/yy')
    ```
 
+1. Package to `connectNas.app` using `pyinstaller`
+
+1. Simply double click `connectNas.app` to get get connected to your server, configure `Open at login` or task schedulers
+
 ## Setup
 
 Tested with
