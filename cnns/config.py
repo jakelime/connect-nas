@@ -18,9 +18,12 @@ kv_list = [
 ]
 
 paths_db = {}
-# Key: smb address
-# Value: mounted local address
-# e.g. "smb://10.10.1.2/photos": "/Volumes/photos"
+# Example .env file
+# NAS_ADDR01_SMB="smb://10.10.10.10/data"
+# NAS_ADDR01_LOCAL="/Volumes/data"
+# NAS_ADDR02_SMB="smb://10.10.10.10/photos"
+# NAS_ADDR02_LOCAL="/Volumes/photos"
+
 for key, value in kv_list:
     k = os.getenv(key, None)
     if not k:
