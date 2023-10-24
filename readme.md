@@ -26,6 +26,9 @@ Tested with
 
 ### Pyinstaller
 
+> [!WARNING]
+> Critical content demanding immediate user attention due to potential risks.
+
 [!NOTE]
 `.env` will be packaged and distributed together in `.app`
 
