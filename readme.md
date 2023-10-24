@@ -26,11 +26,9 @@ Tested with
 
 ### Pyinstaller
 
-> [!WARNING]
-> Critical content demanding immediate user attention due to potential risks.
+WARNING:
 
-[!NOTE]
-`.env` will be packaged and distributed together in `.app`
+- `.env` will be packaged and distributed together in `.app`
 
 ```bash
 pyinstaller cli.py --noconsole --name connectNas --add-data '.env:.'
