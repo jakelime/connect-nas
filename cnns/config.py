@@ -1,34 +1,42 @@
 import os
 import sys
-from cnns.utils import init_logger
-import dotenv
+from pathlib import Path
 
+# import dotenv
+import tomllib
+
+try:
+    from utils import init_logger
+except ImportError:
+    from cnns.utils import init_logger
+
+APP_NAME = "cnns"
 extDataDir = os.getcwd()
 if getattr(sys, "frozen", False):
     extDataDir = sys._MEIPASS
-dotenv.load_dotenv(dotenv_path=os.path.join(extDataDir, ".env"))
+# config_filepath = Path(extDataDir) / APP_NAME / "bundles" / "config.toml"
+config_filepath = Path(extDataDir) / "config.toml"
 
-APP_NAME = "cnns"
 
 log = init_logger(APP_NAME)
 
-kv_list = [
-    ("NAS_ADDR01_SMB", "NAS_ADDR01_LOCAL"),
-    ("NAS_ADDR02_SMB", "NAS_ADDR02_LOCAL"),
-]
 
-paths_db = {}
-# Example .env file
-# NAS_ADDR01_SMB="smb://10.10.10.10/data"
-# NAS_ADDR01_LOCAL="/Volumes/data"
-# NAS_ADDR02_SMB="smb://10.10.10.10/photos"
-# NAS_ADDR02_LOCAL="/Volumes/photos"
+def get_network_map():
+    with open(config_filepath, "rb") as f:
+        data = tomllib.load(f)
+    if not data:
+        raise EnvironmentError(f"missing {config_filepath=}")
+    try:
+        network_maps = data["network_maps"]
+    except KeyError as e:
+        log.error(f"missing key 'network_maps' in {config_filepath=}")
+        raise e
+    return network_maps
 
-for key, value in kv_list:
-    k = os.getenv(key, None)
-    if not k:
-        raise EnvironmentError(f"missing {key=}")
-    v = os.getenv(value, None)
-    if not v:
-        raise EnvironmentError(f"missing {value=}")
-    paths_db[k] = v
+
+def main():
+    log.info(get_network_map())
+
+
+if __name__ == "__main__":
+    main()
