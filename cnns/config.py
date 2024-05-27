@@ -14,7 +14,6 @@ APP_NAME = "cnns"
 extDataDir = os.getcwd()
 if getattr(sys, "frozen", False):
     extDataDir = sys._MEIPASS
-# config_filepath = Path(extDataDir) / APP_NAME / "bundles" / "config.toml"
 config_filepath = Path(extDataDir) / "config.toml"
 
 

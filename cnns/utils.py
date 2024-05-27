@@ -36,7 +36,6 @@ def init_logger(
     )
     if logfile_in_temp_dir:
         global tmpdir
-        # tmpdir = Path(tempfile.mkdtemp())
         tmpdir = tempfile.TemporaryDirectory()
         f_handler = logging.FileHandler(Path(tmpdir.name) / logger_filename)
     else:

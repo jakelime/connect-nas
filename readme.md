@@ -16,7 +16,7 @@ Built for MacOS.
 1. Create the config file
 
    ```shell
-   touch cnns/bundles/config.toml
+   touch config.toml
    ```
 
 1. Follow this template for the `config.toml`. This is a list
