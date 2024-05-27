@@ -1,52 +1,59 @@
 # Connect NAS
 
-App to maintain connection to NAS servers
+App to automatically mount an connection to your Synology NAS or any network drive using `SMB://`
+
+Built for MacOS.
 
 ## Quickstart
 
-1. Clone `git clone git@github.com:jakelime/connect-nas.git`
+1. Clone into your local
 
-1. Go to root dir `cd connect-nas`
-
-1. Create `.env` to load NAS server ip-addresses and local mount point. For example:
-
-   ```bash
-   # Example .env file (//connect-nas/.env)
-   NAS_ADDR01_SMB="smb://10.10.10.10/data"
-   NAS_ADDR01_LOCAL="/Volumes/data"
-   NAS_ADDR02_SMB="smb://10.10.10.10/photos"
-   NAS_ADDR02_LOCAL="/Volumes/photos"
+   ```shell
+   git clone git@github.com:jakelime/connect-nas.git
+   cd connect-nas
    ```
 
-1. Run from entry point `cli.py`
+1. Create the config file
 
-   ```bash
+   ```shell
+   touch cnns/bundles/config.toml
+   ```
+
+1. Follow this template for the `config.toml`. This is a list
+   of `key: value` pairs, and there must be at least 1 pair.
+
+   `key` is local address, in MacOS, it will be mounted as `/Volumes/xxx`
+
+   `value` is network address using the smb protocol.
+
+   ```toml
+   [network_maps]
+   "/Volumes/data" = "smb://10.10.10.10/home/data"
+   "/Volumes/photos" = "smb://10.10.10.10/photos"
+   "/Volumes/videos" = "smb://10.10.10.10/photos"
+   ```
+
+1. Running from the entry point, `cli.py`
+
+   ```shell
    python cli.py
-
-   INFO    : logger initialized - cnns.log
-   INFO    : logfile_path='/var/folders/qy/_bfxymvj5zb_5c5z881z14q40000gn/T/tmpgb1x_dv7/cnns.log'
-   INFO    : already mounted - local_path=PosixPath('/Volumes/xx')
-   file photo:
-   INFO    : mounted successfully - local_path=PosixPath('/Volumes/yy')
    ```
+
+## Packaging into an app
+
+```bash
+source venv/bin/activate
+pyinstaller cli.py --noconsole --name connectNas --add-data 'config.toml:.' --icon icon.icns
+```
 
 1. Package to `connectNas.app` using `pyinstaller`
 
 1. Simply double click `connectNas.app` to get get connected to your server, configure `Open at login` or task schedulers
 
-## Setup
+## Environment
 
 Tested with
 
-- `python` == `3.11.5`
+- Apple Silicon MacOS14.5 Sonoma
+- `python` == `3.12.3`
 - `pip install -r requirements.txt`
-
-### Pyinstaller
-
-WARNING:
-
-- `.env` will be packaged and distributed together in the `.app` distribution file
-
-```bash
-pyinstaller cli.py --noconsole --name connectNas --add-data '.env:.' --icon icon.icns
-```
